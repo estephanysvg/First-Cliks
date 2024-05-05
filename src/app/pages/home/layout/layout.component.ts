@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -11,4 +12,14 @@ import { RouterModule } from '@angular/router';
 export default class LayoutComponent {
   login = './auth/login';
   courses = './courses';
+
+  private authService = inject(AuthService);
+
+  get user() {
+    return this.authService.auth()?.user;
+  }
+
+  logout() {
+    this.authService.logout();
+  }
 }

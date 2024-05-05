@@ -68,9 +68,18 @@
       <li><a>Item 3</a></li>
     </ul>
   </div>
+  @if (user) {
+  <div id="nav-button" class="navbar-end pr-36">
+    <a class="btn">{{ user.firstName }}</a>
+  </div>
+  <div id="nav-button" class="navbar-end pr-36">
+    <a (click)="logout()" class="btn">Cerrar sesión</a>
+  </div>
+  } @else {
   <div id="nav-button" class="navbar-end pr-36">
     <a routerLink="{{ login }}" class="btn">Inicia Sesión</a>
   </div>
+  }
 </div>
 
 <router-outlet />

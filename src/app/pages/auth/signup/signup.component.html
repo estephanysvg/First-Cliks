@@ -6,7 +6,7 @@
 -->
 
 <section class="bg-gray-100">
-  <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 h-screen">
     <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
       <div class="lg:col-span-2 lg:py-12">
         <p class="max-w-xl text-lg">
@@ -27,70 +27,141 @@
       </div>
 
       <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-        <form action="#" class="space-y-4">
-          <div>
-            <label class="sr-only" for="username">Nombre de usuario</label>
+        <form
+          action="POST"
+          [formGroup]="form"
+          (ngSubmit)="signup()"
+          class="space-y-4"
+        >
+          <!-- INPUT USERNAME -->
+          <label class="input input-bordered flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              class="w-4 h-4 opacity-70"
+            >
+              <path
+                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z"
+              />
+            </svg>
             <input
-              class="w-full rounded-lg border-gray-200 p-3 text-sm"
-              placeholder="Nombre usuario"
               type="text"
-              id="username"
+              class="grow"
+              placeholder="Username"
+              formControlName="userName"
             />
-          </div>
-          <div>
-            <label class="sr-only" for="name">Nombre</label>
-            <input
-              class="w-full rounded-lg border-gray-200 p-3 text-sm"
-              placeholder="Nombre"
-              type="text"
-              id="name"
-            />
-          </div>
-          <div>
-            <label class="sr-only" for="name">Nombre</label>
-            <input
-              class="w-full rounded-lg border-gray-200 p-3 text-sm"
-              placeholder="Apellidos"
-              type="text"
-              id="name"
-            />
-          </div>
+            @if(form.get('userName')!.hasError('required')) { El Username es
+            obligatorio }
+          </label>
 
+          <!-- INPUT NOMBRE -->
+          <label class="input input-bordered flex items-center gap-2">
+            <input
+              type="text"
+              formControlName="firstName"
+              class="grow"
+              placeholder="Nombre"
+            />
+            @if(form.get('firstName')!.hasError('required')) { El Nombre es
+            obligatorio }
+          </label>
+
+          <!-- INPUT APELLIDOS -->
+          <label class="input input-bordered flex items-center gap-2">
+            <input
+              type="text"
+              formControlName="lastName"
+              class="grow"
+              placeholder="Apellidos"
+            />
+            @if(form.get('lastName')!.hasError('required')) { los apellidos son
+            obligatorio }
+          </label>
+
+          <!-- INPUT FECHA NACIMIENTO -->
+          <label class="input input-bordered flex items-center gap-2">
+            <input
+              type="text"
+              class="grow"
+              placeholder="dd-mm-yyyy  (Fecha nacimiento)"
+              formControlName="dateOfBirth"
+            />
+          </label>
+
+          <!-- INPUT EMAIL -->
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label class="sr-only" for="email">Email</label>
-              <input
-                class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                placeholder="Email"
-                type="email"
-                id="email"
-              />
+              <label class="input input-bordered flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="w-4 h-4 opacity-70"
+                >
+                  <path
+                    d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z"
+                  />
+                  <path
+                    d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"
+                  />
+                </svg>
+                <input
+                  type="text"
+                  formControlName="email"
+                  class="grow"
+                  placeholder="Email"
+                />
+              </label>
+              @if(form.get('email')!.hasError('required')) { El email es
+              obligatorio } @else if (form.get('email')!.hasError('email')) { El
+              email es inválido }
             </div>
-
+            <!-- INPUT PASSWORD -->
             <div>
-              <label class="sr-only" for="phone">Phone</label>
-              <input
-                class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                placeholder="contraseña"
-                type="password"
-                id="password"
-              />
+              <label class="input input-bordered flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="w-4 h-4 opacity-70"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <input
+                  type="password"
+                  formControlName="password"
+                  class="grow"
+                  placeholder="Contraseña"
+                />
+                @if (form.get('password')!.hasError('required')) { La contraseña
+                es obligatoria } @else if
+                (form.get('password')!.hasError('minlength')) { La contraseña
+                debe tener 4 carácteres como mínimo }
+              </label>
             </div>
           </div>
 
+          <!-- INPUT TUTOR/STUDENT -->
           <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
             <div>
               <label
-                for="Option1"
+                for="TUTOR"
                 class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
                 tabindex="0"
               >
                 <input
                   class="sr-only"
-                  id="Option1"
+                  id="TUTOR"
                   type="radio"
                   tabindex="-1"
-                  name="option"
+                  name="role"
+                  value="TUTOR"
+                  formControlName="role"
                 />
 
                 <span class="text-sm"> Tutor </span>
@@ -99,16 +170,18 @@
 
             <div>
               <label
-                for="Option3"
+                for="STUDENT"
                 class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
                 tabindex="0"
               >
                 <input
                   class="sr-only"
-                  id="Option3"
+                  id="STUDENT"
                   type="radio"
                   tabindex="-1"
-                  name="option"
+                  name="role"
+                  value="STUDENT"
+                  formControlName="role"
                 />
 
                 <span class="text-sm"> Alumno </span>
@@ -116,23 +189,13 @@
             </div>
           </div>
 
-          <div>
-            <label class="sr-only" for="message">Message</label>
-
-            <textarea
-              class="w-full rounded-lg border-gray-200 p-3 text-sm"
-              placeholder="Message"
-              rows="8"
-              id="message"
-            ></textarea>
-          </div>
-
+          <!-- ENVIAR -->
           <div class="mt-4">
             <button
               type="submit"
               class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
             >
-              Send Enquiry
+              Enviar
             </button>
           </div>
         </form>
