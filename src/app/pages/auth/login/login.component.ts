@@ -22,12 +22,22 @@ export default class LoginComponent {
     password: '',
   };
 
+  errors: string[] = [];
+
   login(form: NgForm) {
     console.log(form.value);
     if (form.invalid) {
       return;
     }
-    this.authService.login(this.authRequest).subscribe((user) => {});
-    this.router.navigate(['']);
+    this.authService.login(this.authRequest).subscribe({
+      next: (profile) => {
+        this.router.navigate(['']);
+      },
+      error: (error) => {
+        if (error.error.status === 403) {
+          this.errors.push('Error en el email o contraseña');
+        }
+      },
+    });
   }
 }

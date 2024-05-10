@@ -5,8 +5,8 @@
     - @tailwindcss/forms
 -->
 
-<section class="bg-gray-100">
-  <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 h-screen">
+<section class="bg-gray-100 min-h-screen">
+  <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
       <div class="lg:col-span-2 lg:py-12">
         <p class="max-w-xl text-lg">
@@ -25,8 +25,16 @@
           </address>
         </div>
       </div>
-
       <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
+        @if (errors.length) {
+        <div class="text-error">
+          <ul>
+            @for (error of errors; track error) {
+            <li>{{ error }}</li>
+            }
+          </ul>
+        </div>
+        }
         <form
           action="POST"
           [formGroup]="form"
@@ -51,8 +59,15 @@
               placeholder="Username"
               formControlName="userName"
             />
-            @if(form.get('userName')!.hasError('required')) { El Username es
-            obligatorio }
+            <div
+              class="text-error"
+              [hidden]="
+                form.get('userName')?.valid || form.get('userName')?.pristine
+              "
+            >
+              @if(form.get('userName')?.errors?.["required"]) { El Username es
+              obligatorio }
+            </div>
           </label>
 
           <!-- INPUT NOMBRE -->
@@ -63,8 +78,15 @@
               class="grow"
               placeholder="Nombre"
             />
-            @if(form.get('firstName')!.hasError('required')) { El Nombre es
-            obligatorio }
+            <div
+              class="text-error"
+              [hidden]="
+                form.get('firstName')?.valid || form.get('firstName')?.pristine
+              "
+            >
+              @if(form.get('firstName')?.errors?.["required"]) { El Nombre es
+              obligatorio }
+            </div>
           </label>
 
           <!-- INPUT APELLIDOS -->
@@ -75,8 +97,15 @@
               class="grow"
               placeholder="Apellidos"
             />
-            @if(form.get('lastName')!.hasError('required')) { los apellidos son
-            obligatorio }
+            <div
+              class="text-error"
+              [hidden]="
+                form.get('lastName')?.valid || form.get('lastName')?.pristine
+              "
+            >
+              @if(form.get('lastName')?.errors?.["required"]) { El apellido es
+              obligatorio }
+            </div>
           </label>
 
           <!-- INPUT FECHA NACIMIENTO -->
@@ -87,6 +116,16 @@
               placeholder="dd-mm-yyyy  (Fecha nacimiento)"
               formControlName="dateOfBirth"
             />
+            <div
+              class="text-error"
+              [hidden]="
+                form.get('dateOfBirth')?.valid ||
+                form.get('dateOfBirth')?.pristine
+              "
+            >
+              @if(form.get('dateOfBirth')?.errors?.["dateOfBirth"]) { fecha
+              nacimiento obligatorio }
+            </div>
           </label>
 
           <!-- INPUT EMAIL -->
@@ -113,9 +152,16 @@
                   placeholder="Email"
                 />
               </label>
-              @if(form.get('email')!.hasError('required')) { El email es
-              obligatorio } @else if (form.get('email')!.hasError('email')) { El
-              email es inválido }
+              <div
+                class="text-error"
+                [hidden]="
+                  form.get('email')?.valid || form.get('email')?.pristine
+                "
+              >
+                @if(form.get('email')?.errors?.["required"]) {El email es
+                obligatorio} @else if (form.get('email')?.errors?.["email"]) {
+                Ingrese un email válido}
+              </div>
             </div>
             <!-- INPUT PASSWORD -->
             <div>
@@ -138,11 +184,18 @@
                   class="grow"
                   placeholder="Contraseña"
                 />
-                @if (form.get('password')!.hasError('required')) { La contraseña
-                es obligatoria } @else if
-                (form.get('password')!.hasError('minlength')) { La contraseña
-                debe tener 4 carácteres como mínimo }
               </label>
+              <div
+                class="text-error"
+                [hidden]="
+                  form.get('password')?.valid || form.get('password')?.pristine
+                "
+              >
+                @if(form.get('password')?.errors?.["required"]) {La contraseña
+                es obligatorio} @else if
+                (form.get('password')?.errors?.["minlength"]) { Deben ser al
+                menos 4 carácteres}
+              </div>
             </div>
           </div>
 
@@ -193,7 +246,7 @@
           <div class="mt-4">
             <button
               type="submit"
-              class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
+              class="inline-block w-full rounded-lg bg-primary px-5 py-3 font-medium text-white sm:w-auto"
             >
               Enviar
             </button>
@@ -203,3 +256,4 @@
     </div>
   </div>
 </section>
+{{ form.controls.role.status | json }}

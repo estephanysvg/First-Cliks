@@ -21,6 +21,15 @@
       (ngSubmit)="login(form)"
       class="mx-auto mb-0 mt-8 max-w-md space-y-4"
     >
+      @if (errors.length) {
+      <div class="text-error">
+        <ul>
+          @for (error of errors; track error) {
+          <li>{{ error }}</li>
+          }
+        </ul>
+      </div>
+      }
       <div>
         <label for="email" class="sr-only">Email</label>
 
@@ -32,11 +41,12 @@
             name="email"
             [(ngModel)]="authRequest.email"
             required=""
+            email=""
             #email="ngModel"
           />
-          <div class="text-error">
-            @if(email.hasError('required')) { El email es obligatorio } @else if
-            (email.hasError('pattern')) { Ingrese un email válido }
+          <div class="text-error" [hidden]="email.valid || email.pristine">
+            @if(email.errors?.['required']) { El email es obligatorio } @else if
+            (email.errors?.['email']) { Ingrese un email válido }
           </div>
 
           <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -71,8 +81,11 @@
             required=""
             #password="ngModel"
           />
-          <div class="text-error">
-            @if(password.hasError('required')) { La contraseña es obligatoria }
+          <div
+            class="text-error"
+            [hidden]="password.valid || password.pristine"
+          >
+            @if(password.errors?.['required']) { La contraseña es obligatoria }
           </div>
 
           <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
