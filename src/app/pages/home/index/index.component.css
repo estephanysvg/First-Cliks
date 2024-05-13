@@ -1,3 +1,13 @@
 #background {
   background-image: url("../../../../assets/cover-background.png");
 }
+
+.element-to-move-front {
+  z-index: 1; /* set higher z-index value */
+  position: relative; /* position must be set for z-index to work */
+}
+
+.another-element-behind {
+  z-index: 0; /* set lower z-index value */
+  position: relative; /* position must be set for z-index to work */
+}
