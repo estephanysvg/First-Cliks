@@ -37,7 +37,7 @@
 /*Formato de la ventana*/
 .modalbox{
   position: relative;
-  background: #fff;
+  background: transparent;
   border-radius:3px;
   -webkit-transition: all 500ms ease-in;
   -moz-transition: all 500ms ease-in;
