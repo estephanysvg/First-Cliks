@@ -83,3 +83,12 @@
 .check-terms{
   color: #909aea;
 }
+
+.gradient-text {
+  background: linear-gradient(90deg,#6569e2, #ff7e5f); /* Aquí puedes cambiar los colores del gradiente */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
