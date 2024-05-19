@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-course',
   standalone: true,
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
   templateUrl: './course.component.html',
   styleUrl: './course.component.css'
 })
-export class CourseComponent {
+export default class CourseComponent {
+  
 
 }

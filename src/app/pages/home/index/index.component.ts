@@ -10,4 +10,5 @@ import { RouterModule } from '@angular/router';
 })
 export default class IndexComponent {
   courses = './courses';
+  course = './course';
 }

@@ -11,4 +11,5 @@ import { RouterModule } from '@angular/router';
 export default class LayoutComponent {
   login = './auth/login';
   courses = './courses';
+  course = './course';
 }

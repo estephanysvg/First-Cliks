@@ -11,4 +11,6 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   explore = './courses';
   login = './auth/login';
+  perfil ='/course';
+  
 }

@@ -37,6 +37,12 @@ export const routes: Routes = [
         title: 'Explorar',
         loadComponent: () => import('./pages/home/courses/courses.component'),
       },
+      
+      {
+        path: 'course',
+        title: 'Perfil',
+        loadComponent: () => import('./pages/home/course/course.component'),
+      },
     ],
   },
 ];
