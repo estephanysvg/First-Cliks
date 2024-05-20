@@ -12,4 +12,5 @@ export default class LayoutComponent {
   login = './auth/login';
   courses = './courses';
   course = './course';
+  signup ='./auth/signup';
 }
